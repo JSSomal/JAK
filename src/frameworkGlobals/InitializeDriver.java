@@ -19,14 +19,13 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import interfaces.ClassObject;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 
 public class InitializeDriver implements ClassObject {
 	
 	public static boolean driverFlag= true;
 	//public static WebDriver driver;
-	public static AndroidDriver<MobileElement> driver;
+	public static AndroidDriver driver;
 
 	public static WebDriver privateDriver;
 	public static Capabilities caps;
@@ -71,13 +70,8 @@ public class InitializeDriver implements ClassObject {
 		        // Created object of RemoteWebDriver will all set capabilities.
 		        // Set appium server address and port number in URL string.
 		        // It will launch calculator app in android device.
-<<<<<<< .mine
-		        driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-		        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-=======
 		        driver = new AndroidDriver<WebElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		        //driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
->>>>>>> .r873
 
 
 
