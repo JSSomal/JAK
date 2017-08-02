@@ -1,0 +1,171 @@
+package frameworkGlobals;
+
+import java.io.File;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.tools.ant.taskdefs.condition.And;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
+import interfaces.ClassObject;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+
+public class InitializeDriver implements ClassObject {
+	
+	public static boolean driverFlag= true;
+	//public static WebDriver driver;
+	public static AndroidDriver<MobileElement> driver;
+
+	public static WebDriver privateDriver;
+	public static Capabilities caps;
+	public static String imgeHtmlPath;
+	public static ExtentTest extentTest;
+	//extentDate = new SimpleDateFormat("dd_MM_yyyy").format(new Date());
+	public static ExtentReports extentReport = new ExtentReports(
+			
+			System.getProperty("user.dir") + "\\LogsAndReports\\Reports_"+ClassObject.extentDate+"\\Reports_" + ClassObject.extentDate + ".html", true); ;
+	
+
+	@BeforeClass
+	public static void LaunchApp() {
+		try {
+			System.out.println(extentDate);
+			extentTest = extentReport.startTest("Browser initialization", "initialization of browser and open browser");			
+			
+			 DesiredCapabilities capabilities = new DesiredCapabilities();
+
+		        // Set android deviceName desired capability. Set your device name.
+		        capabilities.setCapability("deviceName", "3605c97");
+
+		        // Set BROWSER_NAME desired capability. It's Android in our case here.
+		        capabilities.setCapability(CapabilityType.BROWSER_NAME, "Android");
+
+		        // Set android VERSION desired capability. Set your mobile device's OS version.
+		        capabilities.setCapability(CapabilityType.VERSION, "6.0.1");
+
+		        // Set android platformName desired capability. It's Android in our case here.
+		        capabilities.setCapability("platformName", "Android");
+
+		        // Set android appPackage desired capability. It is
+		        // com.android.calculator2 for calculator application.
+		        // Set your application's appPackage if you are using any other app.
+		        capabilities.setCapability("appPackage", "com.miui.calculator");
+
+		        // Set android appActivity desired capability. It is
+		        // com.android.calculator2.Calculator for calculator application.
+		        // Set your application's appPackage if you are using any other app.
+		        capabilities.setCapability("appActivity", "com.miui.calculator.cal.CalculatorActivity");
+
+		        // Created object of RemoteWebDriver will all set capabilities.
+		        // Set appium server address and port number in URL string.
+		        // It will launch calculator app in android device.
+		        driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+		        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+
+
+
+
+		        //WebDriver driver = new RemoteWebDriver()//FirefoxDriver();
+		        //System.out.println("2");
+
+		        // Click on DELETE/CLR button to clear result text box before running test.
+		        //driver.findElement(By.xpath("com.google.android.calculator:id/digit_7")).click();
+
+		        // Click on number 2 button.
+		       // driver.findElement(By.name("7")).click();
+			
+			
+			
+			
+			
+			
+			
+	} 
+		
+		catch (Exception e) {
+			
+			throw new java.lang.RuntimeException(e);
+		}
+	}
+	
+	@AfterMethod(alwaysRun = true, groups = {"Smoke", "Regression","Harman","Harinder","Jasmeet","Deepak"}, enabled = true)
+	public void afterMethod(ITestResult result) {
+	    switch (result.getStatus()) {
+	         case 1://Pass
+				extentTest.log(LogStatus.PASS, "Test passed sucessfully");
+				break;
+				
+			case 2://Fail
+				String get_ErrorMessg = result.getThrowable().toString();
+				String errorMSg = result.getThrowable().getMessage();
+				String actionInfo=result.getName();
+				
+				if (get_ErrorMessg.contains("AssertionError")) {
+					
+					extentTest.log(LogStatus.FAIL, "BUGGG >> " + errorMSg);
+					utility.takeScreenshot(actionInfo.replaceAll(" ", "_"));
+					extentTest.log(LogStatus.FAIL, "Screenshort of BuGG :"+ imgeHtmlPath);
+					break;
+				}
+				
+				else if (get_ErrorMessg.contains("RUNTIME_ERROR")) {
+					extentTest.log(LogStatus.UNKNOWN, "Class : ",  result.getInstanceName());
+					extentTest.log(LogStatus.ERROR, "" + errorMSg);
+					extentTest.log(LogStatus.ERROR, "Screenshort of Error :"+ imgeHtmlPath);
+					break;
+				}
+				
+				else{
+					
+					if(get_ErrorMessg.contains("Unable to locate element") || get_ErrorMessg.contains("no_such_element")){
+					
+						extentTest.log(LogStatus.UNKNOWN, "Class : ",  result.getInstanceName());
+						extentTest.log(LogStatus.ERROR, "RUNTIME ERROR >> " + errorMSg);
+					utility.takeScreenshot(actionInfo.replaceAll(" ", "_"));
+					extentTest.log(LogStatus.ERROR, "Screenshort of Error :" + imgeHtmlPath);
+					break;
+					}
+					else{
+						extentTest.log(LogStatus.UNKNOWN, "Class : ",  result.getInstanceName());
+					extentTest.log(LogStatus.ERROR, "RUNTIME ERROR >> " + errorMSg);	
+					break;
+					}
+				}
+			case 3://Skip
+				extentTest = extentReport.startTest(result.getName(), "Class : "+
+			result.getInstanceName());
+				extentTest.log(LogStatus.UNKNOWN, "Class : ",  result.getInstanceName());
+				  extentTest.log(LogStatus.SKIP, "Test skipped " + result.getThrowable());
+				  break;
+	    }	
+	            extentReport.endTest(extentTest);
+		        extentReport.flush();
+	}
+	
+	@AfterSuite(alwaysRun = true, enabled = true)
+	public void aftersuite() {
+		System.setProperty("webdriver.gecko.driver",System.getProperty("user.dir") + "\\BrowserExecuteable\\geckodriver.exe");
+		WebDriver driverResult = new FirefoxDriver();
+		driverResult.get("file://" + System.getProperty("user.dir") + "\\LogsAndReports\\Reports_"+extentDate+"\\Reports_" + extentDate + ".html");
+		System.out.println("Report generated successfully :)");
+	}
+	
+}

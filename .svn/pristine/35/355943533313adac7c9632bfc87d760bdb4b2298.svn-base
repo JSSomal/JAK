@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="9267" started-at="2017-07-27T09:28:16Z" finished-at="2017-07-27T09:28:25Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="9267" started-at="2017-07-27T09:28:16Z" finished-at="2017-07-27T09:28:25Z">
+      <class name="customer.LoginAndForgotPswd">
+        <test-method status="PASS" signature="LaunchApp()[pri:0, instance:customer.LoginAndForgotPswd@6166e06f]" name="LaunchApp" is-config="true" duration-ms="9096" started-at="2017-07-27T14:58:16Z" finished-at="2017-07-27T14:58:25Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- LaunchApp -->
+        <test-method status="PASS" signature="display()[pri:0, instance:customer.LoginAndForgotPswd@6166e06f]" name="display" duration-ms="7" started-at="2017-07-27T14:58:25Z" finished-at="2017-07-27T14:58:25Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- display -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:customer.LoginAndForgotPswd@6166e06f]" name="afterMethod" is-config="true" duration-ms="151" started-at="2017-07-27T14:58:25Z" finished-at="2017-07-27T14:58:25Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=display status=SUCCESS method=LoginAndForgotPswd.display()[pri:0, instance:customer.LoginAndForgotPswd@6166e06f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="aftersuite()[pri:0, instance:customer.LoginAndForgotPswd@6166e06f]" name="aftersuite" is-config="true" duration-ms="6925" started-at="2017-07-27T14:58:25Z" finished-at="2017-07-27T14:58:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- aftersuite -->
+      </class> <!-- customer.LoginAndForgotPswd -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

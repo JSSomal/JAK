@@ -1,0 +1,13 @@
+package customer;
+
+import org.testng.annotations.Test;
+
+import frameworkGlobals.InitializeDriver;
+
+public class LoginAndForgotPswd extends InitializeDriver {
+	@Test
+	public void display(){
+		System.out.println("Check");
+	}
+
+}
