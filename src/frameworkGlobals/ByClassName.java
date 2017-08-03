@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.Select;
 import com.relevantcodes.extentreports.LogStatus;
 
 import interfaces.DriverActions;
-import utilities.JSExecutor;
 
 public class ByClassName extends InitializeDriver implements DriverActions{
 

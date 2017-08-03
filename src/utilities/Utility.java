@@ -29,7 +29,6 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 
-import interfaces.GlobalComponents;
 
 
 
@@ -58,8 +57,8 @@ public class Utility extends InitializeDriver {/*
 	
 	
 	
-	/*
-	public static void sendMail(String to, String from, String subject, String msg)
+	
+	/*public static void sendMail(String to, String from, String subject, String msg)
 	{
 	      String host = "webmail.seasiainfotech.com"; //"smtp.seasiainfotech.com";
 	      Properties properties = System.getProperties();
@@ -80,9 +79,9 @@ public class Utility extends InitializeDriver {/*
 	         ex.printStackTrace();
 	      }
 		
-	}
+	}*/
 
-	*/
+	
 	public void takeScreenshot(String SSname) {
 			
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);

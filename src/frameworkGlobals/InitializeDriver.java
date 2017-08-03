@@ -56,7 +56,7 @@ public class InitializeDriver implements ClassObject {
 
 		        // Set android platformName desired capability. It's Android in our case here.
 		        capabilities.setCapability("platformName", excel.getCellData("Info", "DeviceType", 2));
-		       // capabilities.setCapability("app", "D:\\Selenium_Workspace\\JakMobileAutomation\\Apk\\Jak-Customer-staging-release.apk");
+		        capabilities.setCapability("app", System.getProperty("user.dir")+excel.getCellData("Info", "ApkPath", 2));//"D:\\Selenium_Workspace\\JakMobileAutomation\\Apk\\Jak-Customer-staging-release.apk");
 		        // Set android appPackage desired capability. It is
 		        // com.android.calculator2 for calculator application.
 		        // Set your application's appPackage if you are using any other app.

@@ -152,6 +152,7 @@ public class LoginAndForgotPswd extends InitializeDriver implements iCustomer{
 		extentTest.log(LogStatus.INFO, "Verified, Tap on 'GOOGLE+' Button >> 'Choose account for Jak popup should display.");
 		}
 	
+	// 'jasmeet@yopmail.com' static Email ID is used, please replace it with the same email id which has been used at signup time
 	@Test(priority = 8)
 	public void Jak_0030_1() throws InterruptedException{
 		extentTest = extentReport.startTest("Jak_0030_1","Tap on 'Forgot password' link  >> User should be redirect to 'Reset Password' screen");
@@ -166,6 +167,7 @@ public class LoginAndForgotPswd extends InitializeDriver implements iCustomer{
 		extentTest.log(LogStatus.INFO, "Verified, Tap on 'Forgot password' link >> 'Choose account for Jak popup should display.");
 		}
 	
+	// 'jasmeet@yopmail.com' static Email ID is used, please replace it with the same email id which has been used at signup time
 	@Test(priority = 9)
 	public void Jak_0030_2() throws InterruptedException{
 		extentTest = extentReport.startTest("Jak_0030_2","Tap on 'Forgot password' link  >> Email and SMS options should display");
@@ -183,6 +185,7 @@ public class LoginAndForgotPswd extends InitializeDriver implements iCustomer{
 		extentTest.log(LogStatus.INFO, "Verified, Tap on 'Forgot password' link >> Email and SMS options should display");
 		}
 	
+	// 'jasmeet@yopmail.com' static Email ID is used, please replace it with the same email id which has been used at signup time
 	@Test(priority = 10)
 	public void Jak_0031() throws InterruptedException{
 		extentTest = extentReport.startTest("Jak_0031","Tap on 'Send' button without enter email  >> Validation message 'Invalid email address' should display");
@@ -194,10 +197,11 @@ public class LoginAndForgotPswd extends InitializeDriver implements iCustomer{
 		byId.click(id_ForgotPwdScrSendBtn, "Click on Send Button on 'Forgot Password' screen");
 		String getValiMsg = byId.getText(id_ForgotPwdScrValidationMsgs, "Get validation message");
 		driver.navigate().back();
-		Assert.assertEquals(getValiMsg, "Invalid email address", "No validation message is displaying for blank email field/ validation message text has been changed on 'RESET PASSWORD' screen");
+		Assert.assertEquals(getValiMsg, validationMsg_ForgotPwdScrInvalidEmailID, "No validation message is displaying for blank email field/ validation message text has been changed on 'RESET PASSWORD' screen");
 		extentTest.log(LogStatus.INFO, "Verified, Tap on 'Send' button without enter email  >> Validation message 'Invalid email address' should display");
 		}
 	
+	// 'jasmeet@yopmail.com' static Email ID is used, please replace it with the same email id which has been used at signup time
 	@Test(priority = 11)
 	public void Jak_0032() throws InterruptedException{
 		extentTest = extentReport.startTest("Jak_0032","Enter invalid email address and tap on 'Send' button >> Validation message 'Invalid email address' should display.");
@@ -210,10 +214,11 @@ public class LoginAndForgotPswd extends InitializeDriver implements iCustomer{
 		byId.click(id_ForgotPwdScrSendBtn, "Click on Send Button on 'Forgot Password' screen");
 		String getValiMsg = byId.getText(id_ForgotPwdScrValidationMsgs, "Get validation message");
 		driver.navigate().back();
-		Assert.assertEquals(getValiMsg, "Invalid email address", "No validation message is displaying for invalid email address/ validation message text has been changed on 'RESET PASSWORD' screen");
+		Assert.assertEquals(getValiMsg, validationMsg_ForgotPwdScrInvalidEmailID, "No validation message is displaying for invalid email address/ validation message text has been changed on 'RESET PASSWORD' screen");
 		extentTest.log(LogStatus.INFO, "Verified, Enter invalid email address and tap on 'Send' button >> Validation message 'Invalid email address' should display.");
 		}
 	
+	// 'jasmeet@yopmail.com' static Email ID is used, please replace it with the same email id which has been used at signup time
 	@Test(priority = 12)
 	public void Jak_0033() throws InterruptedException{
 		extentTest = extentReport.startTest("Jak_0032","Enter non-existing email address and tap on 'Send' button >> Validation message 'email is invalid' should display.");
@@ -227,10 +232,148 @@ public class LoginAndForgotPswd extends InitializeDriver implements iCustomer{
 		Thread.sleep(3000);
 		String getValiMsg = byId.getText(id_ForgotPwdScrValidationMsgs, "Get validation message");
 		driver.navigate().back();
-		Assert.assertEquals(getValiMsg, "email is invalid", "No validation message is displaying by entering non-existing email address in email field/ validation message text has been changed on 'RESET PASSWORD' screen");
+		Assert.assertEquals(getValiMsg, validationMsg_ForgotPwdScrNonExistEmailID, "No validation message is displaying by entering non-existing email address in email field/ validation message text has been changed on 'RESET PASSWORD' screen");
 		extentTest.log(LogStatus.INFO, "Verified, Enter non-existing email address and tap on 'Send' button >> Validation message 'email is invalid' should display.");
 		}
 	
+	// 'jasmeet@yopmail.com' static Email ID is used, please replace it with the same email id which has been used at signup time.
+	@Test(priority = 13)
+	public void Jak_0035() throws InterruptedException{
+		extentTest = extentReport.startTest("Jak_0035","Reset Password Screen >> Tap on 'Reset' button >> Validation message 'Reset password code can not be empty' should be display.");
+		Thread.sleep(15000);
+		byId.clearThenSetText(id_LoginPageEnterEmailTB, "jasmeet@yopmail.com", "Enter valid email address in email text field on login page");
+		byXpath.click("//"+className_LoginPageLogo+"[@index='1']", "Tap on Next Icon Adjacent to 'Enter Email' field");
+		Thread.sleep(5000);
+		byId.click(id_LoginPageCreateAccountLink, "Click on 'Forgot Password' link");
+		byId.clearThenSetText(id_ForgotPwdScrEmailTB, "jasmeet@yopmail.com", "Enter valid email address in 'Email' field");
+		byId.click(id_ForgotPwdScrSendBtn, "Click on Send Button on 'Forgot Password' screen");
+		Thread.sleep(3000);
+		byId.click(id_ForgotPwdScrSendBtn, "Tap on 'RESET' button on Reset password screen without filling any fields");
+		String getValiMsg = byId.getText(id_ForgotPwdScrValidationMsgs, "Get Validation message on Reset password screen");
+		driver.navigate().back();
+		driver.navigate().back();
+		Assert.assertEquals(getValiMsg, validationMsg_ResetPasswordResetPwdCodeEmptyTB, "No validation message is displaying clicking on 'RESET' button without filling any field on 'RESET PASSWORD' screen");
+		extentTest.log(LogStatus.INFO, "Verified, Reset Password Screen >> Tap on 'Reset' button >> Validation message 'Reset password code can not be empty' should be display.");
+		}
 	
+	// 'jasmeet@yopmail.com' static Email ID is used, please replace it with the same email id which has been used at signup time
+	// Get Reset code from Email API and use in this test case
+	@Test(priority = 14)
+	public void Jak_0036() throws InterruptedException{
+		extentTest = extentReport.startTest("Jak_0036","Reset Password Screen >> Enter reset code >> Tap on 'Reset' button without enter new and confirm password >> Validation message 'Password length must be more than 8 characters' should display.");
+		Thread.sleep(15000);
+		byId.clearThenSetText(id_LoginPageEnterEmailTB, "jasmeet@yopmail.com", "Enter valid email address in email text field on login page");
+		byXpath.click("//"+className_LoginPageLogo+"[@index='1']", "Tap on Next Icon Adjacent to 'Enter Email' field");
+		Thread.sleep(5000);
+		byId.click(id_LoginPageCreateAccountLink, "Click on 'Forgot Password' link");
+		byId.clearThenSetText(id_ForgotPwdScrEmailTB, "jasmeet@yopmail.com", "Enter valid email address in 'Email' field");
+		byId.click(id_ForgotPwdScrSendBtn, "Click on Send Button on 'Forgot Password' screen");
+		Thread.sleep(3000);
+		byId.clearThenSetText(id_ResetPasswordPwdResetCodeTB, "3E5Be5y", "Enter Reset Code in Password Reset Code field");
+		byId.click(id_ForgotPwdScrSendBtn, "Tap on 'RESET' button on Reset password screen without filling any fields");
+		String getValiMsg = byId.getText(id_ForgotPwdScrValidationMsgs, "Get Validation message on Reset password screen");
+		driver.navigate().back();
+		driver.navigate().back();
+		Assert.assertEquals(getValiMsg, validationMsg_ResetPasswordPwdLength, "No validation message is displaying on 'RESET PASSWORD' screen/ Message text has been changed on 'RESET PASSWORD' screen");
+		extentTest.log(LogStatus.INFO, "Verified, Reset Password Screen >> Enter reset code >> Tap on 'Reset' button without enter new and confirm password >> Validation message 'Password length must be more than 8 characters' should display.");
+		}
+	
+		// 'jasmeet@yopmail.com' static Email ID is used, please replace it with the same email id which has been used at signup time
+		// Get Reset code from Email API and use in this test case
+		@Test(priority = 15)
+		public void Jak_0037() throws InterruptedException{
+			extentTest = extentReport.startTest("Jak_0037","Reset Password Screen >> Enter reset code and password >> Tap on 'Reset' button without enter confirm password >> Validation message 'Password confirmation must match password' should display.");
+			Thread.sleep(15000);
+			byId.clearThenSetText(id_LoginPageEnterEmailTB, "jasmeet@yopmail.com", "Enter valid email address in email text field on login page");
+			byXpath.click("//"+className_LoginPageLogo+"[@index='1']", "Tap on Next Icon Adjacent to 'Enter Email' field");
+			Thread.sleep(5000);
+			byId.click(id_LoginPageCreateAccountLink, "Click on 'Forgot Password' link");
+			byId.clearThenSetText(id_ForgotPwdScrEmailTB, "jasmeet@yopmail.com", "Enter valid email address in 'Email' field");
+			byId.click(id_ForgotPwdScrSendBtn, "Click on Send Button on 'Forgot Password' screen");
+			Thread.sleep(3000);
+			byId.clearThenSetText(id_ResetPasswordPwdResetCodeTB, "3E5Be5y", "Enter Reset Code in Password Reset Code field");
+			byId.clearThenSetText(id_ResetPasswordPwdNewPwdTB, value_Password, "Enter new password in 'New Password' field");
+			byId.click(id_ForgotPwdScrSendBtn, "Tap on 'RESET' button on Reset password screen ");
+			String getValiMsg = byId.getText(id_ForgotPwdScrValidationMsgs, "Get Validation message on Reset password screen");
+			driver.navigate().back();
+			driver.navigate().back();
+			Assert.assertEquals(getValiMsg, validationMsg_ResetPasswordPwdMatching, "No validation message is displaying on 'RESET PASSWORD' screen/ Message text has been changed on 'RESET PASSWORD' screen");
+			extentTest.log(LogStatus.INFO, "Verified, Reset Password Screen >> Enter reset code and password >> Tap on 'Reset' button without enter confirm password >> Validation message 'Password confirmation must match password' should display.");
+			}
+		
+		// 'jasmeet@yopmail.com' static Email ID is used, please replace it with the same email id which has been used at signup time
+		// Get Reset code from Email API and use in this test case
+		@Test(priority = 16)
+		public void Jak_0038() throws InterruptedException{
+			extentTest = extentReport.startTest("Jak_0038","Reset Password Screen >> Enter reset code and Enter mismatch password and Tap on 'Reset' button >> Validation message 'Password confirmation must match password' should display.");
+			Thread.sleep(15000);
+			byId.clearThenSetText(id_LoginPageEnterEmailTB, "jasmeet@yopmail.com", "Enter valid email address in email text field on login page");
+			byXpath.click("//"+className_LoginPageLogo+"[@index='1']", "Tap on Next Icon Adjacent to 'Enter Email' field");
+			Thread.sleep(5000);
+			byId.click(id_LoginPageCreateAccountLink, "Click on 'Forgot Password' link");
+			byId.clearThenSetText(id_ForgotPwdScrEmailTB, "jasmeet@yopmail.com", "Enter valid email address in 'Email' field");
+			byId.click(id_ForgotPwdScrSendBtn, "Click on Send Button on 'Forgot Password' screen");
+			Thread.sleep(3000);
+			byId.clearThenSetText(id_ResetPasswordPwdResetCodeTB, "3E5Be5y", "Enter Reset Code in Password Reset Code field");
+			byId.clearThenSetText(id_ResetPasswordPwdNewPwdTB, value_Password, "Enter new password in 'New Password' field");
+			byId.clearThenSetText(id_ResetPasswordPwdConfirmPwdTB, value_Password, "Enter Confirm password in 'Confirm password' field");
+			driver.pressKeyCode(AndroidKeyCode.BACKSPACE);
+			byId.click(id_ForgotPwdScrSendBtn, "Tap on 'RESET' button on Reset password screen ");
+			String getValiMsg = byId.getText(id_ForgotPwdScrValidationMsgs, "Get Validation message on Reset password screen");
+			driver.navigate().back();
+			driver.navigate().back();
+			Assert.assertEquals(getValiMsg, validationMsg_ResetPasswordPwdMatching, "No validation message is displaying on 'RESET PASSWORD' screen/ Message text has been changed on 'RESET PASSWORD' screen");
+			extentTest.log(LogStatus.INFO, "Verified, Reset Password Screen >> Enter reset code and Enter mismatch password and Tap on 'Reset' button >> Validation message 'Password confirmation must match password' should display.");
+		}
+		
+		//'jasmeet@yopmail.com' static Email ID is used, please replace it with the same email id which has been used at signup time
+		@Test(priority = 17)
+		public void Jak_0039() throws InterruptedException{
+			extentTest = extentReport.startTest("Jak_0039","Reset Password Screen >> Enter invalid reset code, matched new and confirmation password and Tap on 'Reset' button >> Validation message 'Password token is invalid' should display.");
+			Thread.sleep(15000);
+			byId.clearThenSetText(id_LoginPageEnterEmailTB, "jasmeet@yopmail.com", "Enter valid email address in email text field on login page");
+			byXpath.click("//"+className_LoginPageLogo+"[@index='1']", "Tap on Next Icon Adjacent to 'Enter Email' field");
+			Thread.sleep(5000);
+			byId.click(id_LoginPageCreateAccountLink, "Click on 'Forgot Password' link");
+			byId.clearThenSetText(id_ForgotPwdScrEmailTB, "jasmeet@yopmail.com", "Enter valid email address in 'Email' field");
+			byId.click(id_ForgotPwdScrSendBtn, "Click on Send Button on 'Forgot Password' screen");
+			Thread.sleep(3000);
+			byId.clearThenSetText(id_ResetPasswordPwdResetCodeTB, "3E5Be5y", "Enter Reset Code in Password Reset Code field");
+			byId.clearThenSetText(id_ResetPasswordPwdNewPwdTB, value_Password, "Enter new password in 'New Password' field");
+			byId.clearThenSetText(id_ResetPasswordPwdConfirmPwdTB, value_Password, "Enter Confirm password in 'Confirm password' field");
+			byId.click(id_ForgotPwdScrSendBtn, "Tap on 'RESET' button on Reset password screen ");
+			Thread.sleep(2000);
+			String getValiMsg = byId.getText(id_ForgotPwdScrValidationMsgs, "Get Validation message on Reset password screen");
+			driver.navigate().back();
+			driver.navigate().back();
+			Assert.assertEquals(getValiMsg, validationMsg_ResetPasswordInvalidToken, "No validation message is displaying on 'RESET PASSWORD' screen/ Message text has been changed on 'RESET PASSWORD' screen");
+			extentTest.log(LogStatus.INFO, "Verified, Reset Password Screen >> Enter invalid reset code, matched new and confirmation password and Tap on 'Reset' button >> Validation message 'Password token is invalid' should display.");
+		}
+		
+		//'jasmeet@yopmail.com' static Email ID is used, please replace it with the same email id which has been used at signup time
+		// Get Reset code from Email API and use in this test case
+		@Test(priority = 18)
+		public void Jak_0040() throws InterruptedException{
+			extentTest = extentReport.startTest("Jak_0040","Reset Password Screen >> Enter valid reset code, matched new and confirmation password and Tap on 'Reset' button >> Confirmation message display 'Password reset successfully' and user should again redirect to back screen.");
+			Thread.sleep(15000);
+			byId.clearThenSetText(id_LoginPageEnterEmailTB, "jasmeet@yopmail.com", "Enter valid email address in email text field on login page");
+			byXpath.click("//"+className_LoginPageLogo+"[@index='1']", "Tap on Next Icon Adjacent to 'Enter Email' field");
+			Thread.sleep(5000);
+			byId.click(id_LoginPageCreateAccountLink, "Click on 'Forgot Password' link");
+			byId.clearThenSetText(id_ForgotPwdScrEmailTB, "jasmeet@yopmail.com", "Enter valid email address in 'Email' field");
+			byId.click(id_ForgotPwdScrSendBtn, "Click on Send Button on 'Forgot Password' screen");
+			Thread.sleep(3000);
+			byId.clearThenSetText(id_ResetPasswordPwdResetCodeTB, "729967", "Enter Reset Code in Password Reset Code field");
+			byId.clearThenSetText(id_ResetPasswordPwdNewPwdTB, value_Password, "Enter new password in 'New Password' field");
+			byId.clearThenSetText(id_ResetPasswordPwdConfirmPwdTB, value_Password, "Enter Confirm password in 'Confirm password' field");
+			byId.click(id_ForgotPwdScrSendBtn, "Tap on 'RESET' button on Reset password screen ");
+			Thread.sleep(2000);
+			String getValiMsg = byId.getText(id_ForgotPwdScrValidationMsgs, "Get Validation message on Reset password screen");
+			driver.navigate().back();
+			driver.navigate().back();
+			Assert.assertEquals(getValiMsg, validationMsg_ResetPasswordPwdResetsuccessfully, "No 'Password reset successfully' validation message is displaying on 'RESET PASSWORD' screen/ Message text has been changed on 'RESET PASSWORD' screen");
+			extentTest.log(LogStatus.INFO, "Verified, Reset Password Screen >> Enter valid reset code, matched new and confirmation password and Tap on 'Reset' button >> Confirmation message display 'Password reset successfully' and user should again redirect to back screen.");
+		}
+					
 	
 }
