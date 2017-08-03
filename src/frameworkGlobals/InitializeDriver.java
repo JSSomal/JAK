@@ -46,36 +46,32 @@ public class InitializeDriver implements ClassObject {
 			 DesiredCapabilities capabilities = new DesiredCapabilities();
 
 		        // Set android deviceName desired capability. Set your device name.
-		        capabilities.setCapability("deviceName", "07ce7ce700f1d0e1");
+		        capabilities.setCapability("deviceName", excel.getCellData("Info", "DeviceName", 2));//"07ce7ce700f1d0e1");
 
 		        // Set BROWSER_NAME desired capability. It's Android in our case here.
-		        capabilities.setCapability(CapabilityType.BROWSER_NAME, "Android");
+		        capabilities.setCapability(CapabilityType.BROWSER_NAME, excel.getCellData("Info", "DeviceType", 2));
 
 		        // Set android VERSION desired capability. Set your mobile device's OS version.
-		        capabilities.setCapability(CapabilityType.VERSION, "6.0");
+		        capabilities.setCapability(CapabilityType.VERSION, excel.getCellData("Info", "Version", 2));
 
 		        // Set android platformName desired capability. It's Android in our case here.
-		        capabilities.setCapability("platformName", "Android");
+		        capabilities.setCapability("platformName", excel.getCellData("Info", "DeviceType", 2));
 		       // capabilities.setCapability("app", "D:\\Selenium_Workspace\\JakMobileAutomation\\Apk\\Jak-Customer-staging-release.apk");
 		        // Set android appPackage desired capability. It is
 		        // com.android.calculator2 for calculator application.
 		        // Set your application's appPackage if you are using any other app.
-		       // capabilities.setCapability("package", "co.jakapp.customer");
+		        capabilities.setCapability("package", excel.getCellData("Info", "Package", 2));
 
 		        // Set android appActivity desired capability. It is
 		        // com.android.calculator2.Calculator for calculator application.
 		        // Set your application's appPackage if you are using any other app.
-		        //capabilities.setCapability("appActivity", "co.jakapp.customer.activities.SplashActivity");
+		        capabilities.setCapability("appActivity", excel.getCellData("Info", "Activity", 2));
 		        
 		        // Created object of RemoteWebDriver will all set capabilities.
 		        // Set appium server address and port number in URL string.
 		        // It will launch calculator app in android device.
-		        driver = new AndroidDriver<WebElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+		        driver = new AndroidDriver<WebElement>(new URL(excel.getCellData("Info", "URL", 2)), capabilities);
 		        //driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
-
-
-
-
 		        //WebDriver driver = new RemoteWebDriver()//FirefoxDriver();
 		        //System.out.println("2");
 

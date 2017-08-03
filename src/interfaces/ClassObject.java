@@ -8,6 +8,7 @@ import frameworkGlobals.*;
 import utilities.Alerts;
 import utilities.SetLogs;
 import utilities.Utility;
+import utilities.Xls_Reader;
 public interface ClassObject {
 	
 	public static String extentDate = new SimpleDateFormat("dd_MM_yyyy").format(new Date());
@@ -23,6 +24,7 @@ public interface ClassObject {
 	
 	
 	public Utility utility=new Utility();
+	public Xls_Reader excel = new Xls_Reader(System.getProperty("user.dir")+"\\Settings.xlsx");
 	
 	public InitializeDriver browserSelection = new InitializeDriver();
 	

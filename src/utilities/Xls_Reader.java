@@ -2,25 +2,16 @@ package utilities;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Calendar;
-/*
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFCreationHelper;
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFHyperlink;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;*/
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class Xls_Reader {/*
+public class Xls_Reader {
 
 	public String path;
 	public FileInputStream fis = null;
@@ -44,9 +35,9 @@ public class Xls_Reader {/*
 		}
 
 	}
-
+	
 	// returns the row count in a sheet
-	public int getRowCount(String sheetName) {
+	/*public int getRowCount(String sheetName) {
 		int index = workbook.getSheetIndex(sheetName);
 		if (index == -1)
 			return 0;
@@ -56,7 +47,7 @@ public class Xls_Reader {/*
 			return number;
 		}
 
-	}
+	}*/
 
 	// returns the data from a cell
 	public String getCellData(String sheetName, String colName, int rowNum) {
@@ -115,7 +106,7 @@ public class Xls_Reader {/*
 			return "row " + rowNum + " or column " + colName + " does not exist in xls";
 		}
 	}
-
+	/*
 	// returns the data from a cell
 	public String getCellData(String sheetName, int colNum, int rowNum) {
 		try {
